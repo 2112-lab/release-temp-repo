@@ -110,7 +110,7 @@ export default {
         :class="{ 'button-active': mode === 'addDots' }"
         @click="switchMode('addDots')"
       >
-        Add Dots
+        Add Points
       </button>
       <button
         class="button"
