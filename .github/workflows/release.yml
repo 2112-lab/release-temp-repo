@@ -57,5 +57,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Pull or Initialize Amplify
+        run: |
+          npx amplify pull --yes --appId ${{ secrets.AMPLIFY_APP_ID }} --envName prod || \
+          (npx amplify init --yes --appId ${{ secrets.AMPLIFY_APP_ID }} --envName prod --amplify "{ \"envName\":\"prod\" }" --providers "{ \"awscloudformation\": { \"configLevel\": \"project\", \"useProfile\": false, \"accessKeyId\": \"${{ secrets.AWS_ACCESS_KEY_ID }}\", \"secretAccessKey\": \"${{ secrets.AWS_SECRET_ACCESS_KEY }}\" } }" --categories "{}" --no-override)
+
       - name: Deploy to Amplify
-        run: amplify publish --yes
+        run: npx amplify publish --yes
